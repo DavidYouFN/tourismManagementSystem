@@ -1,0 +1,25 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.14.223.141/tourism_management_system?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+
+mybatis:
+  mapper-locations:
+   - classpath:mybatis/mapper/user/*
+   - classpath:mybatis/mapper/commodity/*
+   - classpath:mybatis/mapper/shopCar/*
+   - classpath:mybatis/mapper/order/*
+server:
+  port: 8081
+
+aliyun:
+  oss:
+    access-id:   "LTAI9rV1x0TmtGjq"
+    access-key:  "3QCJw4MhlyZC8zQUATKaLxWZpk4bFY"
+    bucket:      "group-manage"
+    endpoint:    "http://oss-cn-shanghai.aliyuncs.com"
+    dir:         "ImgPackage"
