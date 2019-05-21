@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.shopCar.mapper.ShopCarMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.shopCar.model.ShopCar">
+    <id column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_number" jdbcType="INTEGER" property="commodityNumber" />
+    <result column="commodity_price" jdbcType="VARCHAR" property="commodityPrice" />
+    <result column="commodity_total_price" jdbcType="VARCHAR" property="commodityTotalPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commodity_id, commodity_name, commodity_number, commodity_price, commodity_total_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_shop_car
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_shop_car
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.shopCar.model.ShopCar">
+    insert into tb_shop_car (commodity_id, commodity_name, commodity_number, 
+      commodity_price, commodity_total_price)
+    values (#{commodityId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, #{commodityNumber,jdbcType=INTEGER}, 
+      #{commodityPrice,jdbcType=VARCHAR}, #{commodityTotalPrice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.shopCar.model.ShopCar">
+    insert into tb_shop_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityNumber != null">
+        commodity_number,
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price,
+      </if>
+      <if test="commodityTotalPrice != null">
+        commodity_total_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityNumber != null">
+        #{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTotalPrice != null">
+        #{commodityTotalPrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.shopCar.model.ShopCar">
+    update tb_shop_car
+    <set>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityNumber != null">
+        commodity_number = #{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price = #{commodityPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTotalPrice != null">
+        commodity_total_price = #{commodityTotalPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.shopCar.model.ShopCar">
+    update tb_shop_car
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_number = #{commodityNumber,jdbcType=INTEGER},
+      commodity_price = #{commodityPrice,jdbcType=VARCHAR},
+      commodity_total_price = #{commodityTotalPrice,jdbcType=VARCHAR}
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <select id="getShopCarInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_shop_car
+  </select>
+</mapper>

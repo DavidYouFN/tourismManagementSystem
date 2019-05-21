@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.commodity.mapper.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.commodity.model.Commodity">
+    <id column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_describe" jdbcType="VARCHAR" property="commodityDescribe" />
+    <result column="commodity_price" jdbcType="VARCHAR" property="commodityPrice" />
+    <result column="seller_contact_information" jdbcType="VARCHAR" property="sellerContactInformation" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="favorable_rate" jdbcType="VARCHAR" property="favorableRate" />
+    <result column="nofavorable_rate" jdbcType="VARCHAR" property="nofavorableRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commodity_id, commodity_name, commodity_describe, commodity_price, seller_contact_information, 
+    supplier, favorable_rate, nofavorable_rate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_commodity
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_commodity
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.commodity.model.Commodity">
+    insert into tb_commodity (commodity_id, commodity_name, commodity_describe, 
+      commodity_price, seller_contact_information, 
+      supplier, favorable_rate, nofavorable_rate
+      )
+    values (#{commodityId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, #{commodityDescribe,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=VARCHAR}, #{sellerContactInformation,jdbcType=VARCHAR},
+      #{supplier,jdbcType=VARCHAR}, #{favorableRate,jdbcType=VARCHAR}, #{nofavorableRate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.commodity.model.Commodity">
+    insert into tb_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe,
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price,
+      </if>
+      <if test="sellerContactInformation != null">
+        seller_contact_information,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="favorableRate != null">
+        favorable_rate,
+      </if>
+      <if test="nofavorableRate != null">
+        nofavorable_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDescribe != null">
+        #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerContactInformation != null">
+        #{sellerContactInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="favorableRate != null">
+        #{favorableRate,jdbcType=VARCHAR},
+      </if>
+      <if test="nofavorableRate != null">
+        #{nofavorableRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.commodity.model.Commodity">
+    update tb_commodity
+    <set>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price = #{commodityPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerContactInformation != null">
+        seller_contact_information = #{sellerContactInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="favorableRate != null">
+        favorable_rate = #{favorableRate,jdbcType=VARCHAR},
+      </if>
+      <if test="nofavorableRate != null">
+        nofavorable_rate = #{nofavorableRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.commodity.model.Commodity">
+    update tb_commodity
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      commodity_price = #{commodityPrice,jdbcType=VARCHAR},
+      seller_contact_information = #{sellerContactInformation,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      favorable_rate = #{favorableRate,jdbcType=VARCHAR},
+      nofavorable_rate = #{nofavorableRate,jdbcType=VARCHAR}
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+</mapper>

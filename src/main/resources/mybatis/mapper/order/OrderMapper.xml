@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.order.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.order.model.Order">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_money" jdbcType="DOUBLE" property="orderMoney" />
+    <result column="order_detail_id" jdbcType="VARCHAR" property="orderDetailId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+    <result column="order_evaluate_state" jdbcType="VARCHAR" property="orderEvaluateState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, order_money, order_detail_id, user_id, order_date, order_state, order_evaluate_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.order.model.Order">
+    insert into tb_order (order_id, order_money, order_detail_id, 
+      user_id, order_date, order_state, 
+      order_evaluate_state)
+    values (#{orderId,jdbcType=VARCHAR}, #{orderMoney,jdbcType=VARCHAR}, #{orderDetailId,jdbcType=VARCHAR},
+      #{userId,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, #{orderState,jdbcType=VARCHAR},
+      #{orderEvaluateState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.order.model.Order">
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderMoney != null">
+        order_money,
+      </if>
+      <if test="orderDetailId != null">
+        order_detail_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+      <if test="orderEvaluateState != null">
+        order_evaluate_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null">
+        #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDetailId != null">
+        #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderEvaluateState != null">
+        #{orderEvaluateState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.order.model.Order">
+    update tb_order
+    <set>
+      <if test="orderMoney != null">
+        order_money = #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDetailId != null">
+        order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderEvaluateState != null">
+        order_evaluate_state = #{orderEvaluateState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.order.model.Order">
+    update tb_order
+    set order_money = #{orderMoney,jdbcType=VARCHAR},
+      order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
+      order_state = #{orderState,jdbcType=VARCHAR},
+      order_evaluate_state = #{orderEvaluateState,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <select id="getAllOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="getNoTripOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_state = 1 AND user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="getObligationsOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_state = 2 AND user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="getToBeEvaluatedOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_state = 3 AND user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <update id="setOrderEvalutedState" parameterType="com.felix.project.order.model.Order">
+    update tb_order
+    set
+      order_evaluate_state = 1
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <select id="getAllOrderByAdmin"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+  </select>
+</mapper>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.user.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="birth" jdbcType="VARCHAR" property="birth" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="identityId" jdbcType="VARCHAR" property="identityid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, gender, phone, birth, email, identityId, password, area
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.user.model.User">
+    insert into tb_user (id, username, gender, 
+      phone, birth, email, 
+      identityId, password, area
+      )
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{identityid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.user.model.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="identityid != null">
+        identityId,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null">
+        #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.user.model.User">
+    update tb_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null">
+        identityId = #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.user.model.User">
+    update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      identityId = #{identityid,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <update id="modifyPassword" parameterType="com.felix.project.user.model.User">
+    update tb_user
+    set password = #{password,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <select id="getUserInfo" parameterType="com.felix.project.user.model.User">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+  </select>
+  <select id="getUserList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+  </select>
+</mapper>

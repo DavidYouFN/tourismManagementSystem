@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.commodity.mapper.SellerReleaseMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.commodity.model.SellerRelease">
+    <id column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_price" jdbcType="DOUBLE" property="commodityPrice" />
+    <result column="commodity_describe" jdbcType="VARCHAR" property="commodityDescribe" />
+    <result column="term_of_validity" jdbcType="VARCHAR" property="termOfValidity" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commodity_id, seller_id, commodity_name, commodity_price, commodity_describe, term_of_validity, 
+    stock, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_seller_release
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_seller_release
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.commodity.model.SellerRelease">
+    insert into tb_seller_release (commodity_id, seller_id, commodity_name, 
+      commodity_price, commodity_describe, term_of_validity, 
+      stock, state)
+    values (#{commodityId,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=DOUBLE}, #{commodityDescribe,jdbcType=VARCHAR}, #{termOfValidity,jdbcType=VARCHAR}, 
+      #{stock,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.commodity.model.SellerRelease">
+    insert into tb_seller_release
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price,
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe,
+      </if>
+      <if test="termOfValidity != null">
+        term_of_validity,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityDescribe != null">
+        #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="termOfValidity != null">
+        #{termOfValidity,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.commodity.model.SellerRelease">
+    update tb_seller_release
+    <set>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="termOfValidity != null">
+        term_of_validity = #{termOfValidity,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.commodity.model.SellerRelease">
+    update tb_seller_release
+    set seller_id = #{sellerId,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      term_of_validity = #{termOfValidity,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR}
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <select id="getAllCommodityToStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_seller_release
+  </select>
+</mapper>

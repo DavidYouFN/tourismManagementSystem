@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.order.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.order.model.OrderDetail">
+    <id column="order_detail_id" jdbcType="VARCHAR" property="orderDetailId" />
+    <result column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="commodity_price" jdbcType="DOUBLE" property="commodityPrice" />
+    <result column="commodity_number" jdbcType="INTEGER" property="commodityNumber" />
+    <result column="commodity_describe" jdbcType="VARCHAR" property="commodityDescribe" />
+    <result column="commodity_type" jdbcType="VARCHAR" property="commodityType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_detail_id, commodity_id, commodity_price, commodity_number, commodity_describe, 
+    commodity_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.order.model.OrderDetail">
+    insert into tb_order_detail (order_detail_id, commodity_id, commodity_price, 
+      commodity_number, commodity_describe, commodity_type
+      )
+    values (#{orderDetailId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DOUBLE}, 
+      #{commodityNumber,jdbcType=INTEGER}, #{commodityDescribe,jdbcType=VARCHAR}, #{commodityType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.order.model.OrderDetail">
+    insert into tb_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderDetailId != null">
+        order_detail_id,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price,
+      </if>
+      <if test="commodityNumber != null">
+        commodity_number,
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe,
+      </if>
+      <if test="commodityType != null">
+        commodity_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderDetailId != null">
+        #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityNumber != null">
+        #{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityDescribe != null">
+        #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityType != null">
+        #{commodityType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.order.model.OrderDetail">
+    update tb_order_detail
+    <set>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityNumber != null">
+        commodity_number = #{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityDescribe != null">
+        commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityType != null">
+        commodity_type = #{commodityType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.order.model.OrderDetail">
+    update tb_order_detail
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      commodity_number = #{commodityNumber,jdbcType=INTEGER},
+      commodity_describe = #{commodityDescribe,jdbcType=VARCHAR},
+      commodity_type = #{commodityType,jdbcType=VARCHAR}
+    where order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

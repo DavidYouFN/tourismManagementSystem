@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.user.mapper.SellerMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.user.model.Seller">
+    <id column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="seller_name" jdbcType="VARCHAR" property="sellerName" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="shop_area" jdbcType="VARCHAR" property="shopArea" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="service_type" jdbcType="VARCHAR" property="serviceType" />
+    <result column="assets" jdbcType="VARCHAR" property="assets" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    seller_id, seller_name, shop_name, shop_area, phone, email, service_type,
+    assets
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_seller
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_seller
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.user.model.Seller">
+    insert into tb_seller (seller_id, seller_name,
+      shop_name, shop_area, phone, 
+      email, service_type, assets
+      )
+    values (#{sellerId,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR},
+      #{shopName,jdbcType=VARCHAR}, #{shopArea,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}, #{assets,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.user.model.Seller">
+    insert into tb_seller
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="sellerName != null">
+        seller_name,
+      </if>
+      <if test="shopName != null">
+        shop_name,
+      </if>
+      <if test="shopArea != null">
+        shop_area,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="serviceType != null">
+        service_type,
+      </if>
+      <if test="assets != null">
+        assets,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null">
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopArea != null">
+        #{shopArea,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="assets != null">
+        #{assets,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.user.model.Seller">
+    update tb_seller
+    <set>
+      <if test="sellerName != null">
+        seller_name = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopArea != null">
+        shop_area = #{shopArea,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="assets != null">
+        assets = #{assets,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.user.model.Seller">
+    update tb_seller
+    set seller_name = #{sellerName,jdbcType=VARCHAR},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_area = #{shopArea,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      assets = #{assets,jdbcType=VARCHAR}
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+  </update>
+  <select id="getUserBySellerPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_seller
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  <select id="getSellerList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_seller
+  </select>
+</mapper>

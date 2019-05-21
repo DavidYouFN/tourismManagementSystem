@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.commodity.mapper.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.commodity.model.Picture">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="commodity_pic_url" jdbcType="VARCHAR" property="commodityPicUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, commodity_id, commodity_pic_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_picture
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_picture
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.commodity.model.Picture">
+    insert into tb_picture (id, commodity_id, commodity_pic_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{commodityId,jdbcType=VARCHAR}, #{commodityPicUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.commodity.model.Picture">
+    insert into tb_picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityPicUrl != null">
+        commodity_pic_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicUrl != null">
+        #{commodityPicUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.commodity.model.Picture">
+    update tb_picture
+    <set>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicUrl != null">
+        commodity_pic_url = #{commodityPicUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.commodity.model.Picture">
+    update tb_picture
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      commodity_pic_url = #{commodityPicUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
