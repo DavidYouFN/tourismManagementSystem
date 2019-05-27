@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +56,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String getAllOrder(String userId) {
         List<Order> orderList = orderMapper.getAllOrder(userId);
-        System.out.println(orderList);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS, StaticProperties.RESPONSE_MESSAGE_SUCCESS, orderList);
     }
 
@@ -134,5 +134,26 @@ public class OrderServiceImpl implements OrderService {
         }
         list.add(map);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,list);
+    }
+
+    @Override
+    public String getOrderCount() {
+        int count = orderMapper.getOrderCount();
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String getOrderCountOfToday() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String orderDate = dateFormat.format(date);
+        int count = orderMapper.getOrderCountOfToday(orderDate);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String getOrderCountOfSevenDay(String item) {
+        int count = orderMapper.getOrderCountOfToday(item);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
     }
 }

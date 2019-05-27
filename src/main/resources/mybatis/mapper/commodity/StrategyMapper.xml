@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.project.commodity.mapper.StrategyMapper">
+  <resultMap id="BaseResultMap" type="com.felix.project.commodity.model.Strategy">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="strategy" jdbcType="VARCHAR" property="strategy" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, strategy, img_url, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_strategy
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_strategy
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.felix.project.commodity.model.Strategy">
+    insert into tb_strategy (id, user_id, strategy,
+      img_url, state)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{strategy,jdbcType=VARCHAR},
+      #{imgUrl,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.project.commodity.model.Strategy">
+    insert into tb_strategy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user_id != null">
+        userId,
+      </if>
+      <if test="strategy != null">
+        strategy,
+      </if>
+      <if test="img_url != null">
+        imgUrl,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="strategy != null">
+        #{strategy,jdbcType=VARCHAR},
+      </if>
+      <if test="img_url != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.project.commodity.model.Strategy">
+    update tb_strategy
+    <set>
+      <if test="user_id != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="strategy != null">
+        strategy = #{strategy,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.project.commodity.model.Strategy">
+    update tb_strategy
+    set user_id = #{userId,jdbcType=VARCHAR},
+      strategy = #{strategy,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getStrategy"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_strategy
+  </select>
+  <update id="checkStrategy" parameterType="com.felix.project.commodity.model.Strategy">
+    update tb_strategy
+      set state = '1'
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

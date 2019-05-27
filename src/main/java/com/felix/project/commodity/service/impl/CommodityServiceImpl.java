@@ -12,6 +12,7 @@ import com.felix.project.commonConfig.util.UUIDUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName CommodityServiceImpl
@@ -58,6 +59,12 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public String getCommodityInfoByType(Integer typeId) {
         return null;
+    }
+
+    @Override
+    public String getCommodityInfoByName(String commodityName) {
+        List<Commodity> commodityList = commodityMapper.getCommodityInfoByName(commodityName);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,commodityList);
     }
 
 }

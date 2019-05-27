@@ -139,4 +139,8 @@
     <include refid="Base_Column_List" />
     from tb_seller
   </select>
+  <select id="getSellerCount" resultType="java.lang.Integer">
+    select count(1)
+    from tb_seller
+  </select>
 </mapper>

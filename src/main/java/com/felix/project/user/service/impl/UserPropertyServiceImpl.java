@@ -42,13 +42,15 @@ public class UserPropertyServiceImpl implements UserPropertyService {
     UserMapper userMapper;
 
 
-
-
     @Override
     @Transactional
     public String addProperty(HttpServletRequest httpRequest, HttpServletResponse httpResponse,String userId, String property) throws IOException, AlipayApiException {
         AlipayUtil.aliPay(httpRequest,httpResponse,property);
-        userPropertyMapper.addProperty(userId,property);
+        UserProperty userProperty = userPropertyMapper.selectByPrimaryKey(userId);
+        Integer propertyPO = Integer.valueOf(userProperty.getProperty());
+        Integer money = Integer.valueOf(property);
+        property = String.valueOf(propertyPO+money);
+        userPropertyMapper.updateProperty(userId,property);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
     }
 

@@ -2,9 +2,11 @@ package com.felix.project.commodity.controller;
 
 import com.felix.project.commodity.model.Commodity;
 import com.felix.project.commodity.model.SellerRelease;
+import com.felix.project.commodity.model.Strategy;
 import com.felix.project.commodity.model.Type;
 import com.felix.project.commodity.service.CommodityService;
 import com.felix.project.commodity.service.SellerReleaseService;
+import com.felix.project.commodity.service.StrategyService;
 import com.felix.project.commodity.service.TypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +36,9 @@ public class CommodityController {
 
     @Resource
     SellerReleaseService sellerReleaseService;
+
+    @Resource
+    StrategyService strategyService;
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CommodityController.class);
 
@@ -217,5 +222,57 @@ public class CommodityController {
     @RequestMapping(value = "/getCommodityInfoByType",method = {RequestMethod.POST, RequestMethod.GET})
     public String getCommodityInfoByType(Integer typeId){
         return commodityService.getCommodityInfoByType(typeId);
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 根据商品名查看商品
+     * @Date 2019/5/24 10:43 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "根据商品名查看商品" ,  notes="根据商品名查看商品")
+    @RequestMapping(value = "/getCommodityInfoByName",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getCommodityInfoByName(String commodityName){
+        return commodityService.getCommodityInfoByName(commodityName);
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 用户发布攻略
+     * @Date 2019/5/27 8:14
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "用户发布攻略" ,  notes="用户发布攻略")
+    @RequestMapping(value = "/addStrategy",method = {RequestMethod.POST, RequestMethod.GET})
+    public String addStrategy(Strategy strategy){
+        return strategyService.addStrategy(strategy);
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 查看攻略详情
+     * @Date 2019/5/27 8:41
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "查看攻略详情" ,  notes="查看攻略详情")
+    @RequestMapping(value = "/getStrategy",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getStrategy(){
+        return strategyService.getStrategy();
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 审核攻略
+     * @Date 2019/5/27 9:09
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "审核攻略" ,  notes="审核攻略")
+    @RequestMapping(value = "/checkStrategy",method = {RequestMethod.POST, RequestMethod.GET})
+    public String checkStrategy(String userId){
+        return strategyService.checkStrategy(userId);
     }
 }

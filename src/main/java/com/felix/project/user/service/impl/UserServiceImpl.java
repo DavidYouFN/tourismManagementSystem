@@ -11,6 +11,8 @@ import com.felix.project.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +79,45 @@ public class UserServiceImpl implements UserService {
     public String getUserList() {
         List<User> userList = userMapper.getUserList();
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,userList);
+    }
+
+    @Override
+    public String getUserInfoByUserId(String userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,user);
+    }
+
+    @Override
+    public String modifyUserInfo(User user) {
+        userMapper.updateByPrimaryKey(user);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
+    }
+
+    @Override
+    public String getUserCount() {
+        int count = userMapper.getUserCount();
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String getSellerCount() {
+        int count = sellerMapper.getSellerCount();
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String getUserCountOfToday() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String birth = dateFormat.format(date);
+        int count = userMapper.getUserCountOfToday(birth);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String getUserCountOfSevenDay(String item) {
+        int count = userMapper.getUserCountOfToday(item);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
     }
 
 }

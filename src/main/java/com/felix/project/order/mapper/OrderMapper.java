@@ -28,4 +28,8 @@ public interface OrderMapper {
     int setOrderEvalutedState(Order order);
 
     List<Order> getAllOrderByAdmin();
+
+    int getOrderCount();
+
+    int getOrderCountOfToday(String orderDate);
 }

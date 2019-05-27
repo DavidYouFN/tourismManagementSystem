@@ -3,6 +3,8 @@ package com.felix.project.commodity.mapper;
 import com.felix.project.commodity.model.Commodity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CommodityMapper {
     int deleteByPrimaryKey(String commodityId);
@@ -16,4 +18,6 @@ public interface CommodityMapper {
     int updateByPrimaryKeySelective(Commodity record);
 
     int updateByPrimaryKey(Commodity record);
+
+    List<Commodity> getCommodityInfoByName(String commodityName);
 }

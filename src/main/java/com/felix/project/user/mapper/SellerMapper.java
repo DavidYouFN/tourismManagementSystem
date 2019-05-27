@@ -19,4 +19,6 @@ public interface SellerMapper {
     int updateByPrimaryKey(Seller record);
 
     List<Seller> getSellerList();
+
+    int getSellerCount();
 }

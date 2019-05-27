@@ -138,4 +138,43 @@ public class OrderController {
     public String getAllOrderByAdmin() {
         return orderService.getAllOrderByAdmin();
     }
+    
+    /**
+     * @Author fangyong
+     * @Description 获取订单数量
+     * @Date 2019/5/25 23:51 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "获取订单数量" ,  notes="获取订单数量")
+    @RequestMapping(value = "/getOrderCount",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getOrderCount(){
+        return orderService.getOrderCount();
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 获取当日新增订单数量
+     * @Date 2019/5/26 1:37
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "获取当日新增订单数量" ,  notes="获取当日新增订单数量")
+    @RequestMapping(value = "/getOrderCountOfToday",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getOrderCountOfToday(){
+        return orderService.getOrderCountOfToday();
+    }
+    
+    /**
+     * @Author fangyong
+     * @Description 获取一星期的订单数量
+     * @Date 2019/5/26 12:35 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "获取一星期的订单数量" ,  notes="获取一星期的订单数量")
+    @RequestMapping(value = "/getOrderCountOfDate",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getOrderCountOfSevenDay(String item){
+        return orderService.getOrderCountOfSevenDay(item);
+    }
 }

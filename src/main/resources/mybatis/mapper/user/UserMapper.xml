@@ -159,4 +159,13 @@
     <include refid="Base_Column_List" />
     from tb_user
   </select>
+  <select id="getUserCount" resultType="java.lang.Integer">
+    select count(1)
+    from tb_user
+  </select>
+  <select id="getUserCountOfToday" resultType="java.lang.Integer">
+    select count(1)
+    from tb_user
+    where birth like concat('%',concat(#{birth},'%'))
+  </select>
 </mapper>

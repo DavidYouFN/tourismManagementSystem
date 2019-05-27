@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @ClassName UserController
@@ -227,8 +228,8 @@ public class UserController {
     @ApiOperation(value = "用户充值" ,  notes="用户充值")
     @RequestMapping(value = "/addProperty",method = {RequestMethod.POST, RequestMethod.GET})
     public String addProperty(HttpServletRequest httpRequest, HttpServletResponse httpResponse,
-                              @RequestParam(value = "property", required = false) String property) throws AlipayApiException, IOException {
-        String userId = UUIDUtils.getUUID();
+                              @RequestParam(value = "property", required = false) String property,
+                              String userId) throws AlipayApiException, IOException {
         return userPropertyService.addProperty(httpRequest,httpResponse,userId, property);
     }
 
@@ -321,6 +322,84 @@ public class UserController {
     @RequestMapping(value = "/modifyShop",method = {RequestMethod.POST, RequestMethod.GET})
     public String modifySeller(Seller seller){
         return sellerService.modifySeller(seller);
+    }
+    
+    /**
+     * @Author fangyong
+     * @Description 根据userId获取用户信息
+     * @Date 2019/5/22 0:20 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "根据userId获取用户信息" ,  notes="根据userId获取用户信息")
+    @RequestMapping(value = "/getUserInfoByUserId",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getUserInfoByUserId(String userId){
+        return userService.getUserInfoByUserId(userId);
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 修改用户个人信息
+     * @Date 2019/5/24 9:08
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "修改用户个人信息" ,  notes="修改用户个人信息")
+    @RequestMapping(value = "/modifyUserInfo",method = {RequestMethod.POST, RequestMethod.GET})
+    public String modifyUserInfo(User user){
+        return userService.modifyUserInfo(user);
+    }
+    
+    /**
+     * @Author fangyong
+     * @Description 获取用户数量
+     * @Date 2019/5/25 23:34 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "获取用户数量" ,  notes="获取用户数量")
+    @RequestMapping(value = "/getUserCount",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getUserCount(){
+        return userService.getUserCount();
+    }
+    
+    /**
+     * @Author fangyong
+     * @Description 获取商家数量
+     * @Date 2019/5/25 23:57 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "获取商家数量" ,  notes="获取商家数量")
+    @RequestMapping(value = "/getSellerCount",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getSellerCount(){
+        return userService.getSellerCount();
+    }
+    
+    /**
+     * @Author fangyong
+     * @Description 获取当日注册用户数量
+     * @Date 2019/5/26 0:21 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "获取当日注册用户数量" ,  notes="获取当日注册用户数量")
+    @RequestMapping(value = "/getUserCountOfToday",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getUserCountOfToday(){
+        return userService.getUserCountOfToday();
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 获取一星期注册用户数量
+     * @Date 2019/5/26 18:16
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "获取一星期注册用户数量" ,  notes="获取一星期注册用户数量")
+    @RequestMapping(value = "/getUserCountOfDate",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getUserCountOfSevenDay(String item){
+        return userService.getUserCountOfSevenDay(item);
     }
 
 }

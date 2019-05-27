@@ -22,4 +22,10 @@ public interface OrderService {
     String evaluatedOrder(String orderId);
 
     String getAllOrderByAdmin();
+
+    String getOrderCount();
+
+    String getOrderCountOfToday();
+
+    String getOrderCountOfSevenDay(String item);
 }

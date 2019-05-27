@@ -149,4 +149,13 @@
     <include refid="Base_Column_List" />
     from tb_order
   </select>
+  <select id="getOrderCount"  resultType="java.lang.Integer">
+    select count(1)
+    from tb_order
+  </select>
+  <select id="getOrderCountOfToday" resultType="java.lang.Integer">
+    select count(1)
+    from tb_order
+    where order_date like concat('%',concat(#{orderDate},'%'))
+  </select>
 </mapper>

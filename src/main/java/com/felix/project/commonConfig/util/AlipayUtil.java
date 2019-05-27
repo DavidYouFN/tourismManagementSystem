@@ -29,7 +29,7 @@ public class AlipayUtil {
                 "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiwhHaFCYrNgZrmZW5kWnnm7T9ntoXD4eEvwisbIiRQhrnoiQ0bweMWpSmMh6e68M2sSd0ywWENY4Pprj2P9VtJXcdy3v3Kgl1ZRI6XYQPGU9boNssTfFjCqVsPYYpTdr6mW1rPFxxslT6hTfU8QlxYfcl3g3rN62AlfqneQ5smGK2op0lYlWuQWFVe/h93iHm+2J+XHKlnl0BUPsEk87c0mMKBweMewvt5KfeWXrQSppS7cnbdyOKV8g7M8IrC4Jw1iWbuqvwOhjFNJKKydxyL1srCV1YP34TGcjZjBGq7Vq1Pp1QaVFeuKFnYIVmodX7lmqKzDdhdydEfNJ6cA57QIDAQAB",
                 "RSA2");
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
-        alipayRequest.setReturnUrl("http://localhost:4200/payReturn");
+        alipayRequest.setReturnUrl("http://localhost:8080/order");
         alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");//在公共参数中设置回跳和通知地址
         alipayRequest.setBizContent("{" +
                 "    \"out_trade_no\":"+GetUUID.getOrderIdByTime()+"," +

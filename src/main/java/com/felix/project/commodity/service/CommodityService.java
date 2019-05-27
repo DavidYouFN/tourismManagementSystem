@@ -14,4 +14,5 @@ public interface CommodityService {
 
     String getCommodityInfoByType(Integer typeId);
 
+    String getCommodityInfoByName(String commodityName);
 }

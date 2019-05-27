@@ -4,6 +4,7 @@ import com.felix.project.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -25,4 +26,9 @@ public interface UserMapper {
     int modifyPassword(@Param("username") String username, @Param("password") String password);
 
     List<User> getUserList();
+
+    int getUserCount();
+
+    int getUserCountOfToday(String birth);
+
 }
