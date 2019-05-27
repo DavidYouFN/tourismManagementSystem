@@ -9,6 +9,7 @@ import com.felix.project.commodity.service.CommodityService;
 import com.felix.project.commonConfig.util.JsonUtil;
 import com.felix.project.commonConfig.util.StaticProperties;
 import com.felix.project.commonConfig.util.UUIDUtils;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -89,12 +90,12 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public String getCommodityDetail(String commodityId) {
-        List list = new ArrayList();
+        HashMap map = new HashMap();
         Commodity commodity = commodityMapper.selectByPrimaryKey(commodityId);
         Picture picture = pictureMapper.getImgUrl(commodityId);
-        list.add(commodity);
-        list.add(picture);
-        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,list);
+        map.put("commodityInfo",commodity);
+        map.put("pictureInfo",picture);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,map);
     }
 
 
