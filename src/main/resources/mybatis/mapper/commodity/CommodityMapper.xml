@@ -132,6 +132,6 @@
     select
     <include refid="Base_Column_List" />
     from tb_commodity
-    where commodity_name like '%%'
+    where commodity_name like concat('%',concat(#{commodityName},'%'))
   </select>
 </mapper>
