@@ -275,4 +275,17 @@ public class CommodityController {
     public String checkStrategy(String userId){
         return strategyService.checkStrategy(userId);
     }
+
+    /**
+     * @Author fangyong
+     * @Description 获取图片
+     * @Date 2019/5/27 18:08
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "获取图片" ,  notes="获取图片")
+    @RequestMapping(value = "/getImg",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getImg(){
+        return commodityService.getImg();
+    }
 }

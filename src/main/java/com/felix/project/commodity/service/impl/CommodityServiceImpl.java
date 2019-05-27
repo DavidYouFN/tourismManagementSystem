@@ -67,4 +67,10 @@ public class CommodityServiceImpl implements CommodityService {
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,commodityList);
     }
 
+    @Override
+    public String getImg() {
+        List<Picture> pictureList = pictureMapper.getImg();
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,pictureList);
+    }
+
 }
