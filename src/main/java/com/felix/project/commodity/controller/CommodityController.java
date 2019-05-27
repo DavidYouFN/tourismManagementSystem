@@ -288,4 +288,17 @@ public class CommodityController {
     public String getImg(){
         return commodityService.getImg();
     }
+
+    /**
+     * @Author fangyong
+     * @Description 根据商品id返回商品详情
+     * @Date 2019/5/27 18:49
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "根据商品id返回商品详情" ,  notes="根据商品id返回商品详情")
+    @RequestMapping(value = "/getCommodityDetail",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getCommodityDetail(String commodityId){
+        return commodityService.getCommodityDetail(commodityId);
+    }
 }

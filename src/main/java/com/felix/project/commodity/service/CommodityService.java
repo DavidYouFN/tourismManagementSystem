@@ -17,4 +17,6 @@ public interface CommodityService {
     String getCommodityInfoByName(String commodityName);
 
     String getImg();
+
+    String getCommodityDetail(String commodityId);
 }
