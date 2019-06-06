@@ -101,7 +101,9 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderState("0");
         order.setOrderEvaluateState("0");
         orderMapper.insert(order);
-        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS, StaticProperties.RESPONSE_MESSAGE_SUCCESS, "");
+        Order order1 = orderMapper.selectByPrimaryKey(orderId);
+        String orderDeatilId = order1.getOrderDetailId();
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS, StaticProperties.RESPONSE_MESSAGE_SUCCESS,orderDeatilId);
     }
 
     @Override
@@ -114,26 +116,28 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String getAllOrderByAdmin() {
         List list = new ArrayList();
-        List<Order> orderList = orderMapper.getAllOrderByAdmin();
         HashMap map = new HashMap();
+        List<Order> orderList = orderMapper.getAllOrderByAdmin();
         for(Order order : orderList){
+            HashMap map1 = new HashMap();
             String orderDetailId = order.getOrderDetailId();
             String userId =order.getUserId();
             User user = userMapper.selectByPrimaryKey(userId);
             OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(orderDetailId);
             String commodityId = orderDetail.getCommodityId();
             Commodity commodity = commodityMapper.selectByPrimaryKey(commodityId);
-            map.put("orderId",order.getOrderId());
-            map.put("orderDate",order.getOrderDate());
-            map.put("orderState",order.getOrderState());
-            map.put("userName",user.getUsername());
-            map.put("commodityId",commodity.getCommodityId());
-            map.put("commodityDescribe",commodity.getCommodityDescribe());
-            map.put("commodityNumber",orderDetail.getCommodityNumber());
-            map.put("orderMoney",order.getOrderMoney());
+            map1.put("orderId",order.getOrderId());
+            map1.put("orderDate",order.getOrderDate());
+            map1.put("orderState",order.getOrderState());
+            map1.put("userName",user.getUsername());
+            map1.put("commodityId",commodity.getCommodityId());
+            map1.put("commodityDescribe",commodity.getCommodityDescribe());
+            map1.put("commodityNumber",orderDetail.getCommodityNumber());
+            map1.put("orderMoney",order.getOrderMoney());
+            list.add(map1);
         }
-        list.add(map);
-        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,list);
+        map.put("orderInfo",list);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,map);
     }
 
     @Override
@@ -155,5 +159,11 @@ public class OrderServiceImpl implements OrderService {
     public String getOrderCountOfSevenDay(String item) {
         int count = orderMapper.getOrderCountOfToday(item);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,count);
+    }
+
+    @Override
+    public String generateOrderDetail(OrderDetail orderDetail) {
+        orderDetailMapper.insert(orderDetail);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
     }
 }

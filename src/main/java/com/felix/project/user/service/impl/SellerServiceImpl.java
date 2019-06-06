@@ -43,4 +43,10 @@ public class SellerServiceImpl implements SellerService {
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
     }
 
+    @Override
+    public String getSellerInfoBySellerId(String sellerId) {
+        Seller seller = sellerMapper.selectByPrimaryKey(sellerId);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,seller);
+    }
+
 }

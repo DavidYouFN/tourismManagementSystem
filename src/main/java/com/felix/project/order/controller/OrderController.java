@@ -2,6 +2,7 @@ package com.felix.project.order.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.felix.project.commonConfig.util.StaticProperties;
+import com.felix.project.order.model.OrderDetail;
 import com.felix.project.order.service.OrderService;
 import com.felix.project.user.model.User;
 import io.swagger.annotations.Api;
@@ -111,6 +112,19 @@ public class OrderController {
         User userInfo = (User) session.getAttribute(StaticProperties.SESSION_USER);
         String userId = userInfo.getId();
         return orderService.generateOrder(userId, money);
+    }
+
+    /**
+     * @Author fangyong
+     * @Description 生成订单详情
+     * @Date 2019/5/29 10:16
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "生成订单详情", notes = "生成订单详情")
+    @RequestMapping(value = "/generateOrderDetail", method = {RequestMethod.POST, RequestMethod.GET})
+    public String generateOrderDetail(OrderDetail orderDetail){
+        return orderService.generateOrderDetail(orderDetail);
     }
 
     /**

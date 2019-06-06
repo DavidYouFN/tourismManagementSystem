@@ -39,7 +39,8 @@ public class SellerReleaseImpl implements SellerReleaseService {
         picture.setCommodityPicUrl(ImgURL);
         sellerReleaseMapper.insert(sellerRelease);
         pictureMapper.insert(picture);
-        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
+        SellerRelease sellerRelease1 = sellerReleaseMapper.selectByPrimaryKey(commodity1Id);
+        return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,sellerRelease1);
     }
 
     @Override

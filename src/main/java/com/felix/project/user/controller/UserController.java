@@ -401,5 +401,18 @@ public class UserController {
     public String getUserCountOfSevenDay(String item){
         return userService.getUserCountOfSevenDay(item);
     }
+    
+    /**
+     * @Author fangyong
+     * @Description 根据sellerId查询商家信息
+     * @Date 2019/5/29 14:46 
+     * @Param 
+     * @return 
+     **/
+    @ApiOperation(value = "根据sellerId查询商家信息" ,  notes="根据sellerId查询商家信息")
+    @RequestMapping(value = "/getSellerInfoBySellerId",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getSellerInfoBySellerId(String sellerId){
+        return sellerService.getSellerInfoBySellerId(sellerId);
+    }
 
 }

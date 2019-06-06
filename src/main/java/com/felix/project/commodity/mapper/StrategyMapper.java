@@ -21,4 +21,6 @@ public interface StrategyMapper {
     List<Strategy> getStrategy();
 
     int checkStrategy(@Param("userId") String userId);
+
+    List<Strategy> getUserStrategyList();
 }

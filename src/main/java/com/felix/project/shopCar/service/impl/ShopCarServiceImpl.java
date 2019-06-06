@@ -25,6 +25,11 @@ public class ShopCarServiceImpl implements ShopCarService {
 
     @Override
     public String addShopCar(ShopCar shopCar) {
+        String commodityId = shopCar.getCommodityId();
+        ShopCar shopCar1 = shopCarMapper.selectByPrimaryKey(commodityId);
+        if (shopCar1!=null){
+            return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_FAIL,"亲，你已收藏该产品，快去预定呦","");
+        }
         shopCarMapper.insert(shopCar);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
     }

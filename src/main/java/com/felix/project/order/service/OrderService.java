@@ -1,6 +1,7 @@
 package com.felix.project.order.service;
 
 import com.alipay.api.AlipayApiException;
+import com.felix.project.order.model.OrderDetail;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,4 +29,6 @@ public interface OrderService {
     String getOrderCountOfToday();
 
     String getOrderCountOfSevenDay(String item);
+
+    String generateOrderDetail(OrderDetail orderDetail);
 }

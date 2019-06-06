@@ -35,7 +35,6 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public String addCommodity(Commodity commodity) {
-        commodity.setCommodityId(UUIDUtils.getUUID());
         commodityMapper.insert(commodity);
         return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
     }

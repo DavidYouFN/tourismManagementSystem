@@ -47,6 +47,13 @@ public class UserPropertyServiceImpl implements UserPropertyService {
     public String addProperty(HttpServletRequest httpRequest, HttpServletResponse httpResponse,String userId, String property) throws IOException, AlipayApiException {
         AlipayUtil.aliPay(httpRequest,httpResponse,property);
         UserProperty userProperty = userPropertyMapper.selectByPrimaryKey(userId);
+        if (userProperty==null){
+            UserProperty userProperty1 = new UserProperty();
+            userProperty1.setUserId(userId);
+            userProperty1.setProperty(property);
+            userPropertyMapper.insert(userProperty1);
+            return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,"");
+        }
         Integer propertyPO = Integer.valueOf(userProperty.getProperty());
         Integer money = Integer.valueOf(property);
         property = String.valueOf(propertyPO+money);
@@ -57,6 +64,11 @@ public class UserPropertyServiceImpl implements UserPropertyService {
     @Override
     public String getWalletInfo(String userId) {
         UserProperty userProperty = userPropertyMapper.selectByPrimaryKey(userId);
+        if (userProperty==null){
+            HashMap map = new HashMap();
+            map.put("propertyData",0);
+            return new JsonUtil().JsonInfo(StaticProperties.RESPONSE_STATE_SUCCESS,StaticProperties.RESPONSE_MESSAGE_SUCCESS,map);
+        }
         String property = userProperty.getProperty();
         User userPO = userMapper.selectByPrimaryKey(userId);
         User user = new User();

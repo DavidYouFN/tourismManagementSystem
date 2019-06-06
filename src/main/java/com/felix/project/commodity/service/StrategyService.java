@@ -8,4 +8,6 @@ public interface StrategyService {
     String getStrategy();
 
     String checkStrategy(String userId);
+
+    String getUserStrategyList();
 }

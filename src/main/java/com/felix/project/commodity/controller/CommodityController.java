@@ -301,4 +301,17 @@ public class CommodityController {
     public String getCommodityDetail(String commodityId){
         return commodityService.getCommodityDetail(commodityId);
     }
+
+    /**
+     * @Author fangyong
+     * @Description 获取用户攻略列表
+     * @Date 2019/5/27 22:13
+     * @Param
+     * @return
+     **/
+    @ApiOperation(value = "获取用户攻略列表" ,  notes="获取用户攻略列表")
+    @RequestMapping(value = "/getUserStrategyList",method = {RequestMethod.POST, RequestMethod.GET})
+    public String getUserStrategyList(){
+        return strategyService.getUserStrategyList();
+    }
 }

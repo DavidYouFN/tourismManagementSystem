@@ -98,6 +98,12 @@
   <update id="checkStrategy" parameterType="com.felix.project.commodity.model.Strategy">
     update tb_strategy
       set state = '1'
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  <select id="getUserStrategyList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_strategy
+    where state='1'
+  </select>
 </mapper>

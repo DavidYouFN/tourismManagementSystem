@@ -9,4 +9,6 @@ public interface SellerService {
     String delSeller(String sellerId);
 
     String modifySeller(Seller seller);
+
+    String getSellerInfoBySellerId(String sellerId);
 }
